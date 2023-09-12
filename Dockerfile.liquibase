@@ -1,0 +1,14 @@
+# Use the official Liquibase image from Docker Hub
+FROM liquibase/liquibase:latest
+
+ENV LIQUIBASE_DEFAULTS_FILE=/liquibase/changelog/liquibase.properties
+
+# Check if MySQL is installed before adding it
+RUN if ! lpm list | grep -q mysql; then lpm add mysql --global; fi
+
+# Optionally, you can copy your Liquibase changelog files to the container
+COPY ./liquibase/sql/db/changelog /liquibase/changelog
+
+# Specify the default command to run Liquibase
+# ENTRYPOINT [""]
+CMD ["update","--defaults-file=/liquibase/changelog/liquibase.properties"]

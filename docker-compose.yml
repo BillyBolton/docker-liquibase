@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  library-books:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: library-books
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuserpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - library-books-data:/var/lib/mysql
+
+  # liquibase:
+  #   environment:
+  #     - INSTALL_MYSQL=true
+  #   image: liquibase/liquibase:latest
+  #   volumes:
+  #     - ./liquibase/sql/db/changelog:/liquibase/changelog
+  #   depends_on:
+  #     - library-books
+  #   command:
+  #     [
+  #       "update",
+  #       "--changeLogFile=changelog-master.yaml",
+  #       "--url=jdbc:mysql://library-books:3306/library-books?allowPublicKeyRetrieval=true&useSSL=false",
+  #       "--username=myuser",
+  #       "--password=myuserpassword",
+  #       "--log-level=DEBUG",
+  #     ]
+volumes:
+  library-books-data:
+    driver: local
