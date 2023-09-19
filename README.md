@@ -20,6 +20,9 @@
 ### Update with Default Configurations
 By default, the Liquibase instance will update the database specified by the [properties/parameters](https://docs.liquibase.com/commands/home.html) in `./liquibase/sql/db/changelog/liquibase.properties` with DDL scripts in the same directory (`./liquibase/sql/db/changelog`).
 
+:warning: WARNING :warning:
+Do not include any credentials, including for databases, anywhere in this file. Please configure these with you CI/CD provider.
+
 To run an update with these default configurations:
 
 Via terminal: `sh liquibase-run.sh`
