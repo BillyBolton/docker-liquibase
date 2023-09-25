@@ -3,15 +3,14 @@ databaseChangeLog:
   - changeSet:
       id: "1"
       author: BillyBolton
-
   - include:
       file: DDL/create_books_table.sql
       relativeToChangelogFile: true
+
+  - changeSet:
+      id: "2"
+      author: BillyBolton
+      contextFilter: "@DEV, @STG"
   - include:
       file: DML/insert_data_books.sql
       relativeToChangelogFile: true
-
-
-
-
-

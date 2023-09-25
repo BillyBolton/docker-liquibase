@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  library-books:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: library-books
+      MYSQL_USER: changeme
+      MYSQL_PASSWORD: changeme
+      MYSQL_ROOT_PASSWORD: changeme
+    ports:
+      - "3306:3306"
+    volumes:
+      - library-books-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  library-books-data:
+    driver: local
